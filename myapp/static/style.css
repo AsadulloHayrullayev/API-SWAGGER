@@ -1,0 +1,76 @@
+body {
+    font-family: 'Open Sans', sans-serif; 
+    background-color: #9ae5fe; 
+    color: #333; 
+    margin: 0;
+    padding: 0;
+}
+
+table#productTable {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 16px;
+    background-color: #ffffff; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table#productTable thead {
+    background-color: #0349d6;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    padding: 15px;
+}
+
+table#productTable thead th {
+    padding: 12px;
+    border-bottom: 2px solid #00bcd4; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+table#productTable tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+table#productTable tbody tr:nth-child(even) {
+    background-color: #f1f7f5;
+}
+
+table#productTable tbody tr:hover {
+    background-color: #cce8f7; 
+    cursor: pointer;
+}
+
+table#productTable tbody td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #f1f1f1;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #0026e2; 
+    font-family: 'Courier New', Courier, monospace;
+    margin: 30px 0;
+    font-size: 2.5em;
+}
+
+@media (max-width: 768px) {
+    table#productTable {
+        width: 100%;
+        margin: 10px;
+    }
+
+    table#productTable thead th {
+        font-size: 14px;
+    }
+
+    table#productTable tbody td {
+        font-size: 14px;
+    }
+}
