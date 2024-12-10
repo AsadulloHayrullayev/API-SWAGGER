@@ -48,4 +48,24 @@ class ProductListAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    @swagger_auto_schema(
+        operation_description="Delete a product by ID",
+        manual_parameters=[
+            openapi.Parameter(
+                'id',
+                openapi.IN_QUERY,
+                description="ID of the product to delete",
+                type=openapi.TYPE_INTEGER,
+                required=True,
+            )
+        ],
+        responses={204: "Product deleted successfully", 404: "Product not found"},
+    )
     
+    def delete(self, request, *args, **kwargs):
+        product_id = request.query_params.get('id')
+        if not product_id:
+            return Response({"error": "Product ID is required"}, status=status.HTTP_400_BAD_REQUEST)
+        product = get_object_or_404(Product, id=product_id)
+        product.delete()
+        return Response({"message": "Product deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
