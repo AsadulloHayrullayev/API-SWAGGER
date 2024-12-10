@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from .serializers import ProductSerializer
+from django.shortcuts import get_object_or_404
+from rest_framework import status
 
 def index(request):
     products = Product.objects.all()
@@ -32,3 +34,18 @@ class ProductListAPIView(APIView):
         products = Product.objects.all()
         serializer = ProductSerializer(products,many=True)
         return Response(serializer.data)
+    
+    @swagger_auto_schema(
+        operation_description="Create a new product",
+        request_body=ProductSerializer,
+        responses={201: ProductSerializer},
+    )
+
+    def post(self, request, *args, **kwargs):
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
